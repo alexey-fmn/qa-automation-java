@@ -1,8 +1,8 @@
 package com.tcs.edu;
 
 import static com.tcs.edu.decorator.Doubling.*;
-import static com.tcs.edu.decorator.MessageService.createMessage;
 import static com.tcs.edu.decorator.MessageOrder.*;
+import static com.tcs.edu.decorator.MessageService.createMessage;
 import static com.tcs.edu.decorator.Severity.*;
 
 class Application {
