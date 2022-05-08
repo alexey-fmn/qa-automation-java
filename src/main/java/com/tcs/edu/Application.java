@@ -28,7 +28,7 @@ class Application {
         // по возрастанию
         createMessage(REGULAR, ASC, "3!", "4!");
         // без дублирования
-        createMessage(MINOR, DESC, DISTINCT, "1!", "2!", "3!", "2!");
+        createMessage(MINOR, DESC, DISTINCT, "1!", "2!", "3!", "4!");
         // с дублированием
         createMessage(MAJOR, ASC, DOUBLES, "1!", "2!", "3!", "2!");
     }
