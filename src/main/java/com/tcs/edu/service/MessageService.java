@@ -28,7 +28,7 @@ public class MessageService {
      * @param messages остальной текст
      */
     public void log(Message message, OrderedMessageService order, String... messages) {
-        log(message, order, DistinctedMessageService.DEFAULT, messages);
+        log(message, order, DistinctedMessageService.DOUBLES, messages);
     }
 
     /**

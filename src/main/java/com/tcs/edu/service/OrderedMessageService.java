@@ -19,8 +19,7 @@ public enum OrderedMessageService {
             String[] sortedMessages = new String[messages.length];
             switch (this) {
                 case ASC: {
-                    System.arraycopy(messages, 0, sortedMessages, 0, messages.length - 1 + 1);
-                    break;
+                    return messages;
                 }
                 case DESC: {
                     for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {

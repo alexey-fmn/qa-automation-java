@@ -11,7 +11,7 @@ import com.tcs.edu.decorator.TimestampMessageDecorator;
  *
  * @author Alexey Fomin
  */
-public class ConsolePrinter implements Printer {
+public class ConsolePrinter extends ValidatedService implements Printer {
 
     /**
      * Класс склеивает строку в итогове сообщение Умеет работать с любым количеством агрументов через varargs
@@ -32,7 +32,9 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void print(String message) {
-        System.out.println(message);
+        if (super.isArgsValid(message)) {
+            System.out.println(message);
+        }
     }
 
     /**

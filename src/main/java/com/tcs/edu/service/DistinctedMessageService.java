@@ -18,8 +18,7 @@ public enum DistinctedMessageService {
         if (messages != null) {
             String[] refactorMessages = new String[messages.length];
             switch (this) {
-                case DOUBLES:
-                case DEFAULT: {
+                case DOUBLES: {
                     refactorMessages = messages;
                 }
                 break;
