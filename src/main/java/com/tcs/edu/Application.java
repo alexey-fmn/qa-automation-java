@@ -1,37 +1,29 @@
 package com.tcs.edu;
 
-import static com.tcs.edu.decorator.Doubling.*;
-import static com.tcs.edu.decorator.MessageService.createMessage;
-import static com.tcs.edu.decorator.MessageOrder.*;
-import static com.tcs.edu.decorator.Severity.*;
+import static com.tcs.edu.decorator.SeverityLevel.MAJOR;
+import static com.tcs.edu.decorator.SeverityLevel.MINOR;
+import static com.tcs.edu.service.DistinctedMessageService.DISTINCT;
+import static com.tcs.edu.service.DistinctedMessageService.DOUBLES;
+import static com.tcs.edu.service.OrderedMessageService.ASC;
+import static com.tcs.edu.service.OrderedMessageService.DESC;
+
+import com.tcs.edu.domain.Message;
+import com.tcs.edu.service.MessageService;
 
 class Application {
 
     public static void main(String[] args) {
 
-        // Хочу оставить эту часть кода для историчности
+        Message message1 = new Message(MAJOR, "1");
+        Message message2 = new Message(MAJOR, "22", "22");
+        Message message3 = new Message(MINOR, "1!");
+        Message message4 = new Message(MAJOR, "1!", "2!");
 
-//        for (int i = 0; i < 5; i++) {
-//            Severity severity = values()[new Random().nextInt(values().length)];
-//
-//            process(severity, "Hello world!-ex1");
-//        }
-//
-//        for (int i = 0; i < 2; i++) {
-//            Severity severity = values()[new Random().nextInt(values().length)];
-//
-//            process(severity, "Hello world!_ex2_1st_message", "Hello world!_ex2_2nd_message", null, "123");
-//        }
+        MessageService service = new MessageService();
 
-        // по убыванию
-        createMessage(MINOR, DESC, "sort ascending", "1!", "2!");
-        // по возрастанию
-        createMessage(REGULAR, DESC, "3!", "4!");
-        // без дублирования
-        createMessage(MINOR, DESC, DOUBLES, "1!", "2!", "3!", "2!");
-        // с дублированием
-        createMessage(MAJOR, ASC, DISTINCT, "1!", "2!", "3!", "2!");
+        service.log(message1, "111");
+        service.log(message2, "222");
+        service.log(message3, ASC, DOUBLES, "222");
+        service.log(message4, DESC, DISTINCT, "444", "444");
     }
-
-
 }
