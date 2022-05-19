@@ -1,5 +1,7 @@
 package com.tcs.edu.printer;
 
+import java.util.ArrayList;
+
 /**
  * ConsolePrinter печатает сообщение в консоль
  * <p>
@@ -60,7 +62,7 @@ public class ConsolePrinter implements Printer {
 //        }
 //    }
 
-    public void print2(String[] messages) {
+    public void print(ArrayList<String> messages) {
         if (messages != null) {
             for (String message: messages) {
                 System.out.println(message);

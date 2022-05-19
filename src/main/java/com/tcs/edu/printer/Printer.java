@@ -1,5 +1,7 @@
 package com.tcs.edu.printer;
 
+import java.util.ArrayList;
+
 public interface Printer {
 
     //void print(String decoratedMessage);
@@ -7,5 +9,5 @@ public interface Printer {
     //void printMessages(String... messages);
 
 
-    void print2(String[] messagesWithSeverity);
+    void print(ArrayList<String> messagesWithSeverity);
 }

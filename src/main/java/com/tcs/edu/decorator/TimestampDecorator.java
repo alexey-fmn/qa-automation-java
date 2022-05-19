@@ -26,7 +26,7 @@ public class TimestampDecorator implements Decorator {
         String[] timestampedMessages = new String[messages.length];
 
         for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {
-            String timestampedMessage = String.format("%d %s %s", messageCount, Instant.now(), messages[i]);
+            String timestampedMessage = String.format("%s %s", Instant.now(), messages[i]);
             timestampedMessages[j] = timestampedMessage;
         }
         return timestampedMessages;

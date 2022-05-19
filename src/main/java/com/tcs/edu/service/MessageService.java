@@ -10,6 +10,7 @@ import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 import com.tcs.edu.printer.ConsolePrinter;
 import com.tcs.edu.printer.Printer;
+import java.util.ArrayList;
 
 public class MessageService {
 
@@ -53,8 +54,9 @@ public class MessageService {
         String[] doublingMessages = MessageDuplication.messageDuplication(doubling, sortedMessages);
         String[] messagesWithTimestamp = TimestampDecorator.decorate(doublingMessages);
         String[] messagesWithSeverity = SeverityDecorator.decorate(message.getLevel(), messagesWithTimestamp);
-        String[] countingPagingMessages = CountingPagingDecorator.decorate(messagesWithSeverity);
-        printer.print2(countingPagingMessages);
+        ArrayList<String> countingPagingMessages = CountingPagingDecorator.decorate(messagesWithSeverity);
+
+        printer.print(countingPagingMessages);
         //printer.printMessages(countingPagingMessages);
     }
 
