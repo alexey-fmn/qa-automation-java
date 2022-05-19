@@ -2,6 +2,7 @@ package com.tcs.edu.decorator;
 
 import static com.tcs.edu.printer.ConsolePrinter.messageCount;
 
+import com.tcs.edu.domain.SeverityLevel;
 import java.time.Instant;
 
 /**
@@ -24,4 +25,5 @@ public class TimestampMessageDecorator implements Decorator {
     public String decorate(String message) {
         return String.format("%d %s %s", messageCount, Instant.now(), message);
     }
+
 }
