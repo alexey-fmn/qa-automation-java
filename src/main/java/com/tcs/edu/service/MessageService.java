@@ -57,9 +57,11 @@ public class MessageService {
 
         String[] duplicatedMessages = MessageDuplication.MessageDuplication(doubling, messagesWithSeverity);
         String[] sortedMessages = MessageOrder.sortMessages(messageOrder, duplicatedMessages);
-        printer.printMessages(message.getLevel(), sortedMessages);
+        printer.printMessages(sortedMessages);
     }
 
+
+    // Сначала порядок, потом дубли, потом декорирования, потом вывод в консоль
 
 //    MessageService - конструируемый сервис. В конструктор передаем Printer ( будет печатать готовые сообщения), а также vararg Decorator... decorators.
 //    Декораторы по очереди правят сообщение, а в конце принтер его выводит.
