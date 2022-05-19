@@ -1,31 +1,36 @@
 package com.tcs.edu.decorator;
 
-import com.tcs.edu.domain.SeverityLevel;
-
-public class SeverityDecorator {
+public class SeverityDecorator implements Decorator {
 
     /**
-     * Метод-переключатель переменной. Изменяет значение переданного параметра на необходимый
+     * Метод, который переключает значение переданного уровня level на читаемое знаачение и склевивает это значение с
+     * сообщением.
      *
-     * @param severity -- одно из значений
-     * @return String из списка ["( )", "(!)", "(!!!)"]
+     * @param level серьезность
+     * @param messages массив сообщений для декорации
+     * @return массив строк
      */
 
-    public String decorate(SeverityLevel severity) {
-        String severityString = null;
-        switch (severity) {
-            case MINOR:
-                severityString = "( )";
-                break;
-            case REGULAR:
-                severityString = "(!)";
-                break;
-            case MAJOR:
-                severityString = "(!!!)";
-                break;
+    public static String[] decorate(SeverityLevel level, String[] messages) {
+        String[] severityMessages = new String[messages.length];
+
+        for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {
+            String severityString = null;
+            switch (level) {
+                case MINOR:
+                    severityString = "( )";
+                    break;
+                case REGULAR:
+                    severityString = "(!)";
+                    break;
+                case MAJOR:
+                    severityString = "(!!!)";
+                    break;
+            }
+
+            String decoratedMessage = messages[i] + " " + severityString;
+            severityMessages[j] = decoratedMessage;
         }
-        return severityString;
+        return severityMessages;
     }
-
-
 }

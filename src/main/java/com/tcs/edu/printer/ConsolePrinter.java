@@ -2,7 +2,7 @@ package com.tcs.edu.printer;
 
 import com.tcs.edu.decorator.Decorator;
 import com.tcs.edu.decorator.SeverityDecorator;
-import com.tcs.edu.domain.SeverityLevel;
+import com.tcs.edu.decorator.SeverityLevel;
 import com.tcs.edu.decorator.TimestampDecorator;
 
 /**
@@ -22,14 +22,6 @@ public class ConsolePrinter implements Printer {
 
     private final Decorator decorator = new TimestampDecorator();
 
-    /**
-     * @param message -- сообщение для печати
-     * @param postfix -- декоратор для печати
-     */
-    public void print(String message, String postfix) {
-        System.out.printf("%s %s%n", message, postfix);
-    }
-
     @Override
     public void print(String message) {
         System.out.println(message);
@@ -47,11 +39,11 @@ public class ConsolePrinter implements Printer {
 
             messageCount++;
 
-            final String postfix = new SeverityDecorator().decorate(severity);
+            //final String postfix = new SeverityDecorator().decorate(severity);
             //final String decoratedMessage = decorator.decorate(message);
 
             //print(decoratedMessage, postfix);
-            print(message, postfix);
+            print(message);
 
             if (messageCount % PAGE_SIZE == 0) {
                 print("---");

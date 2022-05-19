@@ -2,6 +2,7 @@ package com.tcs.edu.service;
 
 import static com.tcs.edu.domain.Doubling.DOUBLES;
 
+import com.tcs.edu.decorator.SeverityDecorator;
 import com.tcs.edu.decorator.TimestampDecorator;
 import com.tcs.edu.domain.Doubling;
 import com.tcs.edu.domain.Message;
@@ -50,7 +51,11 @@ public class MessageService {
 
         String[] messagesWithTimestamp = TimestampDecorator.decorate(messageConcatenation);
 
-        String[] duplicatedMessages = MessageDuplication.MessageDuplication(doubling, messagesWithTimestamp);
+        String[] messagesWithSeverity = SeverityDecorator.decorate(message.getLevel(), messagesWithTimestamp);
+
+
+
+        String[] duplicatedMessages = MessageDuplication.MessageDuplication(doubling, messagesWithSeverity);
         String[] sortedMessages = MessageOrder.sortMessages(messageOrder, duplicatedMessages);
         printer.printMessages(message.getLevel(), sortedMessages);
     }
