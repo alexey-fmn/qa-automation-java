@@ -1,8 +1,5 @@
 package com.tcs.edu.printer;
 
-import com.tcs.edu.decorator.Decorator;
-import com.tcs.edu.decorator.TimestampDecorator;
-
 /**
  * ConsolePrinter печатает сообщение в консоль
  * <p>
@@ -20,45 +17,56 @@ public class ConsolePrinter implements Printer {
 
     //private final Decorator decorator = new TimestampDecorator();
 
-    @Override
-    public void print(String message) {
+//    @Override
+//    public void print(String message) {
+//
+//
+//        System.out.println(message);
+//    }
 
-        System.out.println(message);
-    }
-
-    /**
-     * Метод занимается отправкой на печать строки и серьезности, увеличением счетчика страниц и добавлением разделителя
-     * страниц Принимает на вход сообщение и степерь серьзности
-     *
-     * @param message сообщение
-     */
-    private void printMessage(String message) {
-        if (message != null) {
-
-
-            print(message);
-            messageCount++;
-
-            if (messageCount % PAGE_SIZE == 0) {
-                print("---");
-            }
-
-        }
-    }
+//    /**
+//     * Метод занимается отправкой на печать строки и серьезности, увеличением счетчика страниц и добавлением разделителя
+//     * страниц Принимает на вход сообщение и степерь серьзности
+//     *
+//     * @param message сообщение
+//     */
+//    private void printMessage(String message) {
+//        if (message != null) {
+//            messageCount++;
+//
+//
+//            print(message);
+//
+//
+//            if (messageCount % PAGE_SIZE == 0) {
+//                print("---");
+//            }
+//
+//        }
+//    }
 
 
-    /**
-     * Печатаем остальные сообщения, которые переданы
-     * @param messages остальные сообщения
-     */
+//    /**
+//     * Печатаем остальные сообщения, которые переданы
+//     * @param messages остальные сообщения
+//     */
 
-    @Override
-    public void printMessages(String... messages) {
+//    public void printMessages(String... messages) {
+//        if (messages != null) {
+//            for (String current : messages) {
+//                ConsolePrinter printer = new ConsolePrinter();
+//                printer.printMessage(current);
+//            }
+//        }
+//    }
+
+    public void print2(String[] messages) {
         if (messages != null) {
-            for (String current : messages) {
-                ConsolePrinter printer = new ConsolePrinter();
-                printer.printMessage(current);
+            for (String message: messages) {
+                System.out.println(message);
+
             }
         }
     }
 }
+

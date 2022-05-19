@@ -2,6 +2,7 @@ package com.tcs.edu.service;
 
 import static com.tcs.edu.domain.Doubling.DOUBLES;
 
+import com.tcs.edu.decorator.CountingPagingDecorator;
 import com.tcs.edu.decorator.SeverityDecorator;
 import com.tcs.edu.decorator.TimestampDecorator;
 import com.tcs.edu.domain.Doubling;
@@ -48,18 +49,20 @@ public class MessageService {
 
     public void log(Message message, Sorting messageOrder, Doubling doubling, String... messages) {
         String[] messageConcatenation = messageConcatenator.messageConcatenation(message, messages);
-
-        String[] messagesWithTimestamp = TimestampDecorator.decorate(messageConcatenation);
-
+        String[] sortedMessages = MessageOrder.sortMessages(messageOrder, messageConcatenation);
+        String[] doublingMessages = MessageDuplication.messageDuplication(doubling, sortedMessages);
+        String[] messagesWithTimestamp = TimestampDecorator.decorate(doublingMessages);
         String[] messagesWithSeverity = SeverityDecorator.decorate(message.getLevel(), messagesWithTimestamp);
-
-
-
-        String[] duplicatedMessages = MessageDuplication.MessageDuplication(doubling, messagesWithSeverity);
-        String[] sortedMessages = MessageOrder.sortMessages(messageOrder, duplicatedMessages);
-        printer.printMessages(sortedMessages);
+        String[] countingPagingMessages = CountingPagingDecorator.decorate(messagesWithSeverity);
+        printer.print2(countingPagingMessages);
+        //printer.printMessages(countingPagingMessages);
     }
 
+//        String[] messagesWithTimestamp = TimestampDecorator.decorate(messageConcatenation);
+//        String[] messagesWithSeverity = SeverityDecorator.decorate(message.getLevel(), messagesWithTimestamp);
+//        String[] duplicatedMessages = MessageDuplication.messageDuplication(doubling, messagesWithSeverity);
+//        String[] sortedMessages = MessageOrder.sortMessages(messageOrder, duplicatedMessages);
+//        printer.printMessages(sortedMessages);
 
     // Сначала порядок, потом дубли, потом декорирования, потом вывод в консоль
 

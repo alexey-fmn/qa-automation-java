@@ -4,7 +4,7 @@ import com.tcs.edu.domain.Doubling;
 
 public class MessageDuplication {
 
-    static String[] MessageDuplication(Doubling doubling, String... messages) {
+    static String[] messageDuplication(Doubling doubling, String... messages) {
         if (messages != null) {
             String[] refactorMessages = new String[messages.length];
             switch (doubling) {

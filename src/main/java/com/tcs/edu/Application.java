@@ -18,13 +18,13 @@ class Application {
         Message message1 = new Message(MINOR, "message 1");
         Message message2 = new Message(REGULAR, "message 2");
         Message message3 = new Message(MAJOR, "message 3");
-        Message message4 = new Message(MAJOR, "message 4");
+        Message message4 = new Message(MAJOR, "4");
 
         MessageService service = new MessageService();
 
         service.log(message1, "added message 1");
-        service.log(message2, "added message 2");
-        service.log(message3, ASC, DOUBLES, "added message 3");
-        service.log(message4, DESC, DOUBLES, "added message 4", "added message 4");
+        service.log(message2, "added message 4");
+        service.log(message3, ASC, DOUBLES, "message 1");
+        service.log(message4, ASC, DISTINCT, "3", "2", "1");
     }
 }
