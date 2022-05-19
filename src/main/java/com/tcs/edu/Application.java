@@ -3,10 +3,9 @@ package com.tcs.edu;
 import static com.tcs.edu.decorator.SeverityLevel.MAJOR;
 import static com.tcs.edu.decorator.SeverityLevel.MINOR;
 import static com.tcs.edu.decorator.SeverityLevel.REGULAR;
-import static com.tcs.edu.domain.Doubling.DISTINCT;
-import static com.tcs.edu.domain.Doubling.DOUBLES;
+import static com.tcs.edu.domain.Duplication.DISTINCT;
+import static com.tcs.edu.domain.Duplication.DOUBLES;
 import static com.tcs.edu.domain.Sorting.ASC;
-import static com.tcs.edu.domain.Sorting.DESC;
 
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.service.MessageService;

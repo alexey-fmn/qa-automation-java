@@ -1,10 +1,10 @@
 package com.tcs.edu.service;
 
-import com.tcs.edu.domain.Doubling;
+import com.tcs.edu.domain.Duplication;
 
 public class MessageDuplication {
 
-    static String[] messageDuplication(Doubling doubling, String... messages) {
+    public String[] messageDuplication(Duplication doubling, String... messages) {
         if (messages != null) {
             String[] refactorMessages = new String[messages.length];
             switch (doubling) {

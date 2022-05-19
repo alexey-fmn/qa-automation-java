@@ -1,6 +1,5 @@
 package com.tcs.edu.decorator;
 
-import static com.tcs.edu.printer.ConsolePrinter.messageCount;
 
 import java.time.Instant;
 
@@ -21,7 +20,7 @@ public class TimestampDecorator implements Decorator {
      * @param messages -- текст для печати
      * @return Строка со счетчиком, текущем временем с переданной строкой message
      */
-    public static String[] decorate(String... messages) {
+    public String[] decorate(String... messages) {
 
         String[] timestampedMessages = new String[messages.length];
 

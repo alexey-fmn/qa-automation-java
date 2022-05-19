@@ -1,11 +1,11 @@
 package com.tcs.edu.service;
 
-import static com.tcs.edu.domain.Doubling.DOUBLES;
+import static com.tcs.edu.domain.Duplication.DOUBLES;
 
 import com.tcs.edu.decorator.CountingPagingDecorator;
 import com.tcs.edu.decorator.SeverityDecorator;
 import com.tcs.edu.decorator.TimestampDecorator;
-import com.tcs.edu.domain.Doubling;
+import com.tcs.edu.domain.Duplication;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 import com.tcs.edu.printer.ConsolePrinter;
@@ -14,8 +14,13 @@ import java.util.ArrayList;
 
 public class MessageService {
 
-    final Printer printer = new ConsolePrinter();
-    private final MessageConcatenator messageConcatenator = new MessageConcatenator();
+    private final Printer printer = new ConsolePrinter();
+    private final MessageConcatenator concatenator = new MessageConcatenator();
+    private final MessageOrder sorter = new MessageOrder();
+    private final MessageDuplication duplicator = new MessageDuplication();
+    private final TimestampDecorator timestamper = new TimestampDecorator();
+    private final SeverityDecorator severityer = new SeverityDecorator();
+    private final CountingPagingDecorator counterPager = new CountingPagingDecorator();
 
     /**
      * Метод для текста только с уровнем значимости и текстом сообщекния. По умолчанию добавляется прямой порядок
@@ -48,25 +53,20 @@ public class MessageService {
      * @param messages остальной текст
      */
 
-    public void log(Message message, Sorting messageOrder, Doubling doubling, String... messages) {
-        String[] messageConcatenation = messageConcatenator.messageConcatenation(message, messages);
-        String[] sortedMessages = MessageOrder.sortMessages(messageOrder, messageConcatenation);
-        String[] doublingMessages = MessageDuplication.messageDuplication(doubling, sortedMessages);
-        String[] messagesWithTimestamp = TimestampDecorator.decorate(doublingMessages);
-        String[] messagesWithSeverity = SeverityDecorator.decorate(message.getLevel(), messagesWithTimestamp);
-        ArrayList<String> countingPagingMessages = CountingPagingDecorator.decorate(messagesWithSeverity);
+    public void log(Message message, Sorting messageOrder, Duplication doubling, String... messages) {
+
+        String[] messageConcatenation = concatenator.messageConcatenation(message, messages);
+        String[] sortedMessages = sorter.sortMessages(messageOrder, messageConcatenation);
+        String[] doublingMessages = duplicator.messageDuplication(doubling, sortedMessages);
+        String[] messagesWithTimestamp = timestamper.decorate(doublingMessages);
+        String[] messagesWithSeverity = severityer.decorate(message.getLevel(), messagesWithTimestamp);
+        ArrayList<String> countingPagingMessages = counterPager.decorate(messagesWithSeverity);
 
         printer.print(countingPagingMessages);
-        //printer.printMessages(countingPagingMessages);
     }
+}
 
-//        String[] messagesWithTimestamp = TimestampDecorator.decorate(messageConcatenation);
-//        String[] messagesWithSeverity = SeverityDecorator.decorate(message.getLevel(), messagesWithTimestamp);
-//        String[] duplicatedMessages = MessageDuplication.messageDuplication(doubling, messagesWithSeverity);
-//        String[] sortedMessages = MessageOrder.sortMessages(messageOrder, duplicatedMessages);
-//        printer.printMessages(sortedMessages);
-
-    // Сначала порядок, потом дубли, потом декорирования, потом вывод в консоль
+// Сначала порядок, потом дубли, потом декорирования, потом вывод в консоль
 
 //    MessageService - конструируемый сервис. В конструктор передаем Printer ( будет печатать готовые сообщения), а также vararg Decorator... decorators.
 //    Декораторы по очереди правят сообщение, а в конце принтер его выводит.
@@ -80,4 +80,3 @@ public class MessageService {
 //    Предлагаю в качестве аргумента конструктора CountingPagingDecorator передавать int pageSize.
 //    С помощью паттерна "телескопический конструктор" задать дефолтное значение pageSize = 2.
 //    Счетчик выведенных сообщений должен перестать быть статическим, а начать относиться к конкретному декоратору
-}

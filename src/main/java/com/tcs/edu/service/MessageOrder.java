@@ -4,7 +4,7 @@ import com.tcs.edu.domain.Sorting;
 
 public class MessageOrder {
 
-    static String[] sortMessages(Sorting messageOrder, String... messages) {
+    public String[] sortMessages(Sorting messageOrder, String... messages) {
         if (messages != null) {
             String[] sortedMessages = new String[messages.length];
             switch (messageOrder) {

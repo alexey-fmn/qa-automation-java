@@ -11,7 +11,7 @@ public class SeverityDecorator implements Decorator {
      * @return массив строк
      */
 
-    public static String[] decorate(SeverityLevel level, String[] messages) {
+    public String[] decorate(SeverityLevel level, String[] messages) {
         String[] severityMessages = new String[messages.length];
 
         for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {
