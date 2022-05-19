@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 public class MessageService {
 
-    private final Printer printer = new ConsolePrinter();
-    private final MessageConcatenator concatenator = new MessageConcatenator();
-    private final MessageOrder sorter = new MessageOrder();
-    private final MessageDuplication duplicator = new MessageDuplication();
-    private final TimestampDecorator timestamper = new TimestampDecorator();
-    private final SeverityDecorator severityer = new SeverityDecorator();
-    private final CountingPagingDecorator counterPager = new CountingPagingDecorator();
+    private final Printer printService = new ConsolePrinter();
+    private final MessageConcatenator concatenateService = new MessageConcatenator();
+    private final MessageOrder sortService = new MessageOrder();
+    private final MessageDuplication duplicateService = new MessageDuplication();
+    private final TimestampDecorator timestampService = new TimestampDecorator();
+    private final SeverityDecorator severityService = new SeverityDecorator();
+    private final CountingPagingDecorator counterPageService = new CountingPagingDecorator();
 
     /**
      * Метод для текста только с уровнем значимости и текстом сообщекния. По умолчанию добавляется прямой порядок
@@ -55,14 +55,14 @@ public class MessageService {
 
     public void log(Message message, Sorting messageOrder, Duplication doubling, String... messages) {
 
-        String[] messageConcatenation = concatenator.messageConcatenation(message, messages);
-        String[] sortedMessages = sorter.sortMessages(messageOrder, messageConcatenation);
-        String[] doublingMessages = duplicator.messageDuplication(doubling, sortedMessages);
-        String[] messagesWithTimestamp = timestamper.decorate(doublingMessages);
-        String[] messagesWithSeverity = severityer.decorate(message.getLevel(), messagesWithTimestamp);
-        ArrayList<String> countingPagingMessages = counterPager.decorate(messagesWithSeverity);
+        String[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
+        String[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
+        String[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
+        String[] messagesWithTimestamp = timestampService.decorate(doublingMessages);
+        String[] messagesWithSeverity = severityService.decorate(message.getLevel(), messagesWithTimestamp);
+        ArrayList<String> countingPagingMessages = counterPageService.decorate(messagesWithSeverity);
 
-        printer.print(countingPagingMessages);
+        printService.print(countingPagingMessages);
     }
 }
 

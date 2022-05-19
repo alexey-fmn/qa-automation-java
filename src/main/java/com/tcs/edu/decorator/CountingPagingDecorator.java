@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 public class CountingPagingDecorator implements Decorator {
 
-    int PAGE_SIZE = 2;
-    int MESSAGE_COUNTER = 0;
+    static int MESSAGE_COUNTER = 0;
+
 
     public ArrayList<String> decorate(String[] messagesWithSeverity) {
+        return CountingPagingDecorator.decorate(messagesWithSeverity, 2);
+    }
+
+    public static ArrayList<String> decorate(String[] messagesWithSeverity, int pageSize) {
 
         ArrayList<String> countingDecoratedMessages = new ArrayList<>();
 
@@ -15,7 +19,7 @@ public class CountingPagingDecorator implements Decorator {
             MESSAGE_COUNTER++;
             countingDecoratedMessages.add(MESSAGE_COUNTER + " " + messagesWithSeverity[i]);
 
-            if (MESSAGE_COUNTER % PAGE_SIZE == 0) {
+            if (MESSAGE_COUNTER % pageSize == 0) {
                 countingDecoratedMessages.add("---");
             }
         }

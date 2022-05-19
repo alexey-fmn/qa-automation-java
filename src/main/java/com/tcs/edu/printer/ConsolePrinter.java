@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ConsolePrinter implements Printer {
 
     /**
-     * Класс склеивает строку в итогове сообщение Умеет работать с любым количеством агрументов через varargs
+     * Метод печатает строку через System.out.println
      */
 
 
