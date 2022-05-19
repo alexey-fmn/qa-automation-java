@@ -1,10 +1,12 @@
-package com.tcs.edu.service;public class MessageConcatenator{	public MessageConcatenator()	{	}/**
-     * Класс, объединяющий все сообщения в один массив
-     *
-     * @param message сообщения
-     * @param messages сообщения
-     * @return массив сообщений
-     */
-    private java.lang.String[] getMessageConcatenation(com.tcs.edu.domain.Message message, java.lang.String[] messages) {
-        return java.util.stream.Stream.concat(java.util.stream.Stream.of(message.getBody()), java.util.stream.Stream.of(messages)).toArray(java.lang.String[]::new);
-    }}
+package com.tcs.edu.service;
+
+import com.tcs.edu.domain.Message;
+import java.util.stream.Stream;
+
+public class MessageConcatenator {
+
+    public String[] messageConcatenation(Message message, String... messages) {
+        return Stream.concat(Stream.of(message.getBody()), Stream.of(messages)).toArray(String[]::new);
+
+    }
+}

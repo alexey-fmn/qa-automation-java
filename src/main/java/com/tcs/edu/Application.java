@@ -1,11 +1,11 @@
 package com.tcs.edu;
 
-import static com.tcs.edu.decorator.SeverityLevel.MAJOR;
-import static com.tcs.edu.decorator.SeverityLevel.MINOR;
-import static com.tcs.edu.service.DistinctedMessageService.DISTINCT;
-import static com.tcs.edu.service.DistinctedMessageService.DOUBLES;
-import static com.tcs.edu.service.OrderedMessageService.ASC;
-import static com.tcs.edu.service.OrderedMessageService.DESC;
+import static com.tcs.edu.domain.SeverityLevel.MAJOR;
+import static com.tcs.edu.domain.SeverityLevel.MINOR;
+import static com.tcs.edu.domain.Doubling.DISTINCT;
+import static com.tcs.edu.domain.Doubling.DOUBLES;
+import static com.tcs.edu.domain.Sorting.ASC;
+import static com.tcs.edu.domain.Sorting.DESC;
 
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.service.MessageService;
@@ -15,9 +15,9 @@ class Application {
     public static void main(String[] args) {
 
         Message message1 = new Message(MAJOR, "1");
-        Message message2 = new Message(MAJOR, "22", "22");
+        Message message2 = new Message(MAJOR, "22");
         Message message3 = new Message(MINOR, "1!");
-        Message message4 = new Message(MAJOR, "1!", "2!");
+        Message message4 = new Message(MAJOR, "1!");
 
         MessageService service = new MessageService();
 

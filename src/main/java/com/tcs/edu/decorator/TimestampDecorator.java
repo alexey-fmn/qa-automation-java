@@ -2,7 +2,6 @@ package com.tcs.edu.decorator;
 
 import static com.tcs.edu.printer.ConsolePrinter.messageCount;
 
-import com.tcs.edu.domain.SeverityLevel;
 import java.time.Instant;
 
 /**
@@ -12,18 +11,37 @@ import java.time.Instant;
  *
  * @author Alexey Fomin
  */
-public class TimestampMessageDecorator implements Decorator {
+public class TimestampDecorator implements Decorator {
 
     /**
      * Метод доабвляет счетчик и текущее время
      * <p>
      * This class add now time before any message and messageCount counter before text
      *
-     * @param message -- текст для печати
+     * @param messages -- текст для печати
      * @return Строка со счетчиком, текущем временем с переданной строкой message
      */
-    public String decorate(String message) {
-        return String.format("%d %s %s", messageCount, Instant.now(), message);
+    public static String[] decorate(String... messages) {
+
+        //return String.format("%d %s %s", messageCount, Instant.now(), messages);
+        String[] timestampedMessages = new String[messages.length];
+
+//        for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {
+//            String.format("%d %s %s", messageCount, Instant.now(), messages);
+//            timestampedMessages[j] = messages[i];
+//            System.out.println("========" + messages[i]);
+//        }
+//        return timestampedMessages;
+
+        //String.format("%d %s %s", messageCount, Instant.now(), message);
+        for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {
+            String timestampedMessage = String.format("%d %s %s", messageCount, Instant.now(), messages[i]);
+            timestampedMessages[j] = timestampedMessage;
+        }
+        //return timestampedMessages;
+
+        return timestampedMessages;
     }
 
 }
+

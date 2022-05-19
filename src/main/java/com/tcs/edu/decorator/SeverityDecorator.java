@@ -1,5 +1,7 @@
 package com.tcs.edu.decorator;
 
+import com.tcs.edu.domain.SeverityLevel;
+
 public class SeverityDecorator {
 
     /**
@@ -9,7 +11,7 @@ public class SeverityDecorator {
      * @return String из списка ["( )", "(!)", "(!!!)"]
      */
 
-    public String severityDecorator(SeverityLevel severity) {
+    public String decorate(SeverityLevel severity) {
         String severityString = null;
         switch (severity) {
             case MINOR:

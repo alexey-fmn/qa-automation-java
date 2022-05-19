@@ -1,13 +1,18 @@
-package com.tcs.edu.service;public class MessageDuplication{private static java.lang.String[] MessageDuplication(com.tcs.edu.domain.Doubling doubling, java.lang.String... messages) {
+package com.tcs.edu.service;
+
+import com.tcs.edu.domain.Doubling;
+
+public class MessageDuplication {
+
+    static String[] MessageDuplication(Doubling doubling, String... messages) {
         if (messages != null) {
-            java.lang.String[] refactorMessages = new java.lang.String[messages.length];
+            String[] refactorMessages = new String[messages.length];
             switch (doubling) {
-                case DOUBLES : {
-                    refactorMessages =  messages;
+                case DOUBLES: {
+                    return messages;
                 }
-                break;
                 case DISTINCT: {
-                    refactorMessages = new java.lang.String[messages.length];
+                    refactorMessages = new String[messages.length];
                     for (int i = 0; i <= messages.length - 1; i++) {
                         if (!isMessageInArray(messages[i], refactorMessages)) {
                             refactorMessages[i] = messages[i];
@@ -19,10 +24,12 @@ package com.tcs.edu.service;public class MessageDuplication{private static java.
             return refactorMessages;
         }
         return null;
-    }private static boolean isMessageInArray(java.lang.String message, java.lang.String... array) {
+    }
+
+    static boolean isMessageInArray(String message, String... array) {
         boolean isMessageInArray = false;
         if (array != null) {
-            for (java.lang.String messageArray : array) {
+            for (String messageArray : array) {
                 if (messageArray != null && messageArray.equals(message)) {
                     isMessageInArray = true;
                     break;
@@ -30,4 +37,5 @@ package com.tcs.edu.service;public class MessageDuplication{private static java.
             }
         }
         return isMessageInArray;
-    }}
+    }
+}

@@ -2,8 +2,8 @@ package com.tcs.edu.printer;
 
 import com.tcs.edu.decorator.Decorator;
 import com.tcs.edu.decorator.SeverityDecorator;
-import com.tcs.edu.decorator.SeverityLevel;
-import com.tcs.edu.decorator.TimestampMessageDecorator;
+import com.tcs.edu.domain.SeverityLevel;
+import com.tcs.edu.decorator.TimestampDecorator;
 
 /**
  * ConsolePrinter печатает сообщение в консоль
@@ -20,7 +20,7 @@ public class ConsolePrinter implements Printer {
     private static final int PAGE_SIZE = 2;
     public static int messageCount = 0;
 
-    private final Decorator decorator = new TimestampMessageDecorator();
+    private final Decorator decorator = new TimestampDecorator();
 
     /**
      * @param message -- сообщение для печати
@@ -47,16 +47,18 @@ public class ConsolePrinter implements Printer {
 
             messageCount++;
 
-            final String postfix = new SeverityDecorator().severityDecorator(severity);
-            final String decoratedMessage = decorator.decorate(message);
+            final String postfix = new SeverityDecorator().decorate(severity);
+            //final String decoratedMessage = decorator.decorate(message);
 
-            print(decoratedMessage, postfix);
+            //print(decoratedMessage, postfix);
+            print(message, postfix);
 
             if (messageCount % PAGE_SIZE == 0) {
                 print("---");
             }
         }
     }
+
 
     /**
      * Печатаем остальные сообщения, которые переданы

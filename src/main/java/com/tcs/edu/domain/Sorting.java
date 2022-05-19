@@ -1,9 +1,9 @@
-package com.tcs.edu.service;
+package com.tcs.edu.domain;
 
 /**
  * ASC -- сортировка по возрастанию DESC -- сортировка по убыванию
  */
 
-public enum OrderedMessageService {
+public enum Sorting {
     ASC, DESC;
 }
