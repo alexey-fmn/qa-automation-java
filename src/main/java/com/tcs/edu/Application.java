@@ -20,10 +20,19 @@ class Application {
         Message message2 = new Message(REGULAR, "message 2");
         Message message3 = new Message(MAJOR, "message 3");
         Message message4 = new Message(MAJOR, "4");
+        Message message5 = new Message(REGULAR, "message 2");
+        Message message6 = new Message(MINOR, "999");
+
 
         service.log(message1, "added message 1");
         service.log(message2, "added message 4");
         service.log(message3, ASC, DOUBLES, "message 1");
         service.log(message4, ASC, DISTINCT, "3", "2", "1");
+
+        System.out.println(message6);
+        System.out.println(message2.equals(message5));
+        System.out.println(message3.equals(message5));
+
+        System.out.println(message2.hashCode());
     }
 }
