@@ -13,22 +13,14 @@ import java.time.Instant;
 public class TimestampDecorator implements Decorator {
 
     /**
-     * Метод доабвляет счетчик и текущее время
-     * <p>
-     * This class add now time before any message and messageCount counter before text
+     * Метод принимает на вход строку и возвращает строку, декорированную значением текуего времени
      *
-     * @param messages -- текст для печати
-     * @return Строка со счетчиком, текущем временем с переданной строкой message
+     * @param message -- строка
+     * @return -- строка + сообщение
      */
-    public String[] decorate(String... messages) {
-
-        String[] timestampedMessages = new String[messages.length];
-
-        for (int i = messages.length - 1, j = 0; i >= 0; i--, j++) {
-            String timestampedMessage = String.format("%s %s", Instant.now(), messages[i]);
-            timestampedMessages[j] = timestampedMessage;
-        }
-        return timestampedMessages;
+    @Override
+    public String decorate(String message) {
+        return String.format("%s %s", Instant.now(), message);
     }
 
 }

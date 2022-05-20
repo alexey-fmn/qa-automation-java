@@ -2,25 +2,28 @@ package com.tcs.edu.service;
 
 import static com.tcs.edu.domain.Duplication.DOUBLES;
 
-import com.tcs.edu.decorator.CountingPagingDecorator;
+import com.tcs.edu.decorator.Decorator;
 import com.tcs.edu.decorator.SeverityDecorator;
-import com.tcs.edu.decorator.TimestampDecorator;
 import com.tcs.edu.domain.Duplication;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
-import com.tcs.edu.printer.ConsolePrinter;
 import com.tcs.edu.printer.Printer;
-import java.util.ArrayList;
 
 public class MessageService {
 
-    private final Printer printService = new ConsolePrinter();
+
+    private final Printer printService;
     private final MessageConcatenator concatenateService = new MessageConcatenator();
-    private final MessageOrder sortService = new MessageOrder();
     private final MessageDuplication duplicateService = new MessageDuplication();
-    private final TimestampDecorator timestampService = new TimestampDecorator();
-    private final SeverityDecorator severityService = new SeverityDecorator();
-    private final CountingPagingDecorator counterPageService = new CountingPagingDecorator();
+    private final MessageOrder sortService = new MessageOrder();
+
+    private final Decorator[] decorators;
+
+    public MessageService(Printer printService, Decorator... decorators) {
+        this.printService = printService;
+        this.decorators = decorators;
+    }
+
 
     /**
      * Метод для текста только с уровнем значимости и текстом сообщекния. По умолчанию добавляется прямой порядок
@@ -55,13 +58,29 @@ public class MessageService {
 
     public void log(Message message, Sorting messageOrder, Duplication doubling, String... messages) {
 
-        String[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
-        String[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
-        String[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
-        String[] messagesWithTimestamp = timestampService.decorate(doublingMessages);
-        String[] messagesWithSeverity = severityService.decorate(message.getLevel(), messagesWithTimestamp);
-        ArrayList<String> countingPagingMessages = counterPageService.decorate(messagesWithSeverity);
+        Message[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
+        Message[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
+        Message[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
 
-        printService.print(countingPagingMessages);
+        for (Message doublingMessage : doublingMessages) {
+            String result = doublingMessage.getBody();
+            for (Decorator decorator : decorators) {
+                result = decorator.decorate(result);
+            }
+            result = new SeverityDecorator(message.getLevel()).decorate(result);
+            printService.print(result);
+        }
+
+
     }
 }
+
+//        String[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
+//        String[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
+//        String[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
+//        String[] messagesWithTimestamp = timestampService.decorate(doublingMessages);
+//        String[] messagesWithSeverity = severityService.decorate(message.getLevel(), messagesWithTimestamp);
+//        ArrayList<String> countingPagingMessages = counterPageService.decorate(messagesWithSeverity);
+//
+//
+//        printService.print(countingPagingMessages);
