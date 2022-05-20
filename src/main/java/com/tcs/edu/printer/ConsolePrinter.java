@@ -1,8 +1,6 @@
 package com.tcs.edu.printer;
 
-import static com.tcs.edu.decorator.MessageService.process;
-
-import com.tcs.edu.decorator.Severity;
+import java.util.ArrayList;
 
 /**
  * ConsolePrinter печатает сообщение в консоль
@@ -10,18 +8,20 @@ import com.tcs.edu.decorator.Severity;
  *
  * @author Alexey Fomin
  */
-public class ConsolePrinter {
+public class ConsolePrinter implements Printer {
 
     /**
-     * @param message -- сообщение для печати
-     * @param postfix -- декоратор для печати
+     * Метод печатает строку через System.out.println
      */
 
-    public static void print(String message, String postfix) {
-        System.out.printf("%s %s%n", message, postfix);
-    }
 
-    public static void print(String message) {
-        System.out.println(message);
+    public void print(ArrayList<String> messages) {
+        if (messages != null) {
+            for (String message : messages) {
+                System.out.println(message);
+
+            }
+        }
     }
 }
+
