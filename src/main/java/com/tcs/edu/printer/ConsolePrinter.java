@@ -1,5 +1,6 @@
 package com.tcs.edu.printer;
 
+import com.tcs.edu.service.ValidatedService;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Alexey Fomin
  */
-public class ConsolePrinter implements Printer {
+public class ConsolePrinter extends ValidatedService implements Printer {
 
     /**
      * Метод печатает строку через System.out.println
@@ -16,7 +17,7 @@ public class ConsolePrinter implements Printer {
 
 
     public void print(ArrayList<String> messages) {
-        if (messages != null) {
+        if (messages != null && super.argsIsValid(messages)) {
             for (String message : messages) {
                 System.out.println(message);
 
