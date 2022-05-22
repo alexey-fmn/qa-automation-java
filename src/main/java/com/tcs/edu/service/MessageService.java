@@ -58,6 +58,8 @@ public class MessageService {
 
     public void log(Message message, Sorting messageOrder, Duplication doubling, String... messages) {
 
+        //Message messageConcatenation = message;
+
         Message[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
         Message[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
         Message[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
@@ -74,13 +76,3 @@ public class MessageService {
 
     }
 }
-
-//        String[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
-//        String[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
-//        String[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
-//        String[] messagesWithTimestamp = timestampService.decorate(doublingMessages);
-//        String[] messagesWithSeverity = severityService.decorate(message.getLevel(), messagesWithTimestamp);
-//        ArrayList<String> countingPagingMessages = counterPageService.decorate(messagesWithSeverity);
-//
-//
-//        printService.print(countingPagingMessages);

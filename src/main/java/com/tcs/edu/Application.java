@@ -36,10 +36,10 @@ class Application {
         service.log(message3, ASC, DOUBLES, "message 1");
         service.log(message4, ASC, DISTINCT, "3", "2", "1");
 
-//        System.out.println(message6);
-//        System.out.println(message2.equals(message5));
-//        System.out.println(message3.equals(message5));
-//
-//        System.out.println(message2.hashCode());
+        System.out.println(message6);
+        System.out.println(message2.equals(message5));
+        System.out.println(message3.equals(message5));
+
+        System.out.println(message2.hashCode());
     }
 }
