@@ -1,6 +1,8 @@
 package com.tcs.edu.printer;
 
+import com.tcs.edu.service.LogException;
 import com.tcs.edu.service.ValidatedService;
+import javax.security.auth.login.LoginException;
 
 /**
  * ConsolePrinter печатает сообщение в консоль
@@ -17,8 +19,10 @@ public class ConsolePrinter extends ValidatedService implements Printer {
 
     @Override
     public void print(String message) {
-        if (super.argsIsValid(message)) {
-            System.out.println(message);
+        try {
+            super.argsIsValid(message);
+        } catch (IllegalArgumentException e ) {
+            throw new LogException("Wrong args!", e);
         }
 
     }

@@ -58,11 +58,10 @@ public class MessageService {
 
     public void log(Message message, Sorting messageOrder, Duplication doubling, String... messages) {
 
-        //Message messageConcatenation = message;
-
         Message[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
         Message[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
         Message[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
+
 
         for (Message doublingMessage : doublingMessages) {
             String result = doublingMessage.getBody();
@@ -71,8 +70,7 @@ public class MessageService {
             }
             result = new SeverityDecorator(message.getLevel()).decorate(result);
             printService.print(result);
+
         }
-
-
     }
 }
