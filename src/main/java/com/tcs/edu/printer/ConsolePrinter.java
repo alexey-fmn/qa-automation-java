@@ -9,7 +9,7 @@ import com.tcs.edu.service.ValidatedService;
  *
  * @author Alexey Fomin
  */
-public class ConsolePrinter extends ValidatedService implements Printer {
+public class ConsolePrinter implements Printer {
 
     /**
      * Метод проверяет строку на валидность и печатает строку через System.out.println
@@ -18,13 +18,7 @@ public class ConsolePrinter extends ValidatedService implements Printer {
 
     @Override
     public void print(String message) {
-        try {
-            super.argsIsValid(message);
             System.out.println(message);
-        } catch (IllegalArgumentException e) {
-            throw new LogException("Wrong args!", e);
-        }
-
     }
 }
 

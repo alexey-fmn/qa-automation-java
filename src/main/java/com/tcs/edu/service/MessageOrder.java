@@ -3,10 +3,10 @@ package com.tcs.edu.service;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 
-public class MessageOrder {
+public class MessageOrder extends ValidatedService {
 
     public Message[] sortMessages(Sorting messageOrder, Message... messages) {
-        if (messages != null) {
+        if (super.argsIsValid(messages)) {
             Message[] sortedMessages = new Message[messages.length];
             switch (messageOrder) {
                 case ASC: {
@@ -20,8 +20,7 @@ public class MessageOrder {
                 break;
             }
             return sortedMessages;
-        } else {
-            return null;
         }
+        return null;
     }
 }

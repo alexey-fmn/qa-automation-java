@@ -3,10 +3,10 @@ package com.tcs.edu.service;
 import com.tcs.edu.domain.Duplication;
 import com.tcs.edu.domain.Message;
 
-public class MessageDuplication {
+public class MessageDuplication extends ValidatedService {
 
     public Message[] messageDuplication(Duplication doubling, Message... messages) {
-        if (messages != null) {
+        if (super.argsIsValid(messages)) {
             Message[] refactorMessages = new Message[messages.length];
             switch (doubling) {
                 case DOUBLES: {
