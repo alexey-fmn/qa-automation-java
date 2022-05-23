@@ -6,7 +6,9 @@ import com.tcs.edu.domain.Message;
 public class MessageDuplication extends ValidatedService {
 
     public Message[] messageDuplication(Duplication doubling, Message... messages) {
-        if (super.argsIsValid(messages)) {
+
+        try {
+            super.argsIsValid(messages);
             Message[] refactorMessages = new Message[messages.length];
             switch (doubling) {
                 case DOUBLES: {
@@ -23,20 +25,26 @@ public class MessageDuplication extends ValidatedService {
                 break;
             }
             return refactorMessages;
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments at messageDuplication!", e);
         }
-        return null;
+
     }
 
-    static boolean isMessageInArray(Message message, Message... array) {
+    boolean isMessageInArray(Message message, Message... messages) {
         boolean isMessageInArray = false;
-        if (array != null) {
-            for (Message messageArray : array) {
+
+        try {
+            super.argsIsValid(message);
+            for (Message messageArray : messages) {
                 if (messageArray != null && messageArray.getBody().equals(message.getBody())) {
                     isMessageInArray = true;
                     break;
                 }
             }
+            return isMessageInArray;
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments!", e);
         }
-        return isMessageInArray;
     }
 }

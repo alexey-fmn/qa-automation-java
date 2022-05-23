@@ -6,7 +6,9 @@ import com.tcs.edu.domain.Sorting;
 public class MessageOrder extends ValidatedService {
 
     public Message[] sortMessages(Sorting messageOrder, Message... messages) {
-        if (super.argsIsValid(messages)) {
+
+        try {
+            super.argsIsValid(messages);
             Message[] sortedMessages = new Message[messages.length];
             switch (messageOrder) {
                 case ASC: {
@@ -17,10 +19,10 @@ public class MessageOrder extends ValidatedService {
                         sortedMessages[j] = messages[i];
                     }
                 }
-                break;
             }
             return sortedMessages;
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments!", e);
         }
-        return null;
     }
 }
