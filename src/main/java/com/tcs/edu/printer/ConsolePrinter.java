@@ -1,6 +1,7 @@
 package com.tcs.edu.printer;
 
-import java.util.ArrayList;
+import com.tcs.edu.service.LogException;
+import com.tcs.edu.service.ValidatedService;
 
 /**
  * ConsolePrinter печатает сообщение в консоль
@@ -8,20 +9,22 @@ import java.util.ArrayList;
  *
  * @author Alexey Fomin
  */
-public class ConsolePrinter implements Printer {
+public class ConsolePrinter extends ValidatedService implements Printer {
 
     /**
-     * Метод печатает строку через System.out.println
+     * Метод проверяет строку на валидность и печатает строку через System.out.println
      */
 
 
-    public void print(ArrayList<String> messages) {
-        if (messages != null) {
-            for (String message : messages) {
-                System.out.println(message);
-
-            }
+    @Override
+    public void print(String message) {
+        try {
+            super.argsIsValid(message);
+            System.out.println(message);
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong args!", e);
         }
+
     }
 }
 

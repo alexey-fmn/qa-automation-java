@@ -1,12 +1,13 @@
 package com.tcs.edu.service;
 
+import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 
 public class MessageOrder {
 
-    public String[] sortMessages(Sorting messageOrder, String... messages) {
+    public Message[] sortMessages(Sorting messageOrder, Message... messages) {
         if (messages != null) {
-            String[] sortedMessages = new String[messages.length];
+            Message[] sortedMessages = new Message[messages.length];
             switch (messageOrder) {
                 case ASC: {
                     return messages;
