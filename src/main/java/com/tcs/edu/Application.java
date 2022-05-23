@@ -1,10 +1,8 @@
 package com.tcs.edu;
 
 import static com.tcs.edu.decorator.SeverityLevel.MAJOR;
-import static com.tcs.edu.decorator.SeverityLevel.MINOR;
 import static com.tcs.edu.decorator.SeverityLevel.REGULAR;
 import static com.tcs.edu.domain.Duplication.DISTINCT;
-import static com.tcs.edu.domain.Duplication.DOUBLES;
 import static com.tcs.edu.domain.Sorting.ASC;
 
 import com.tcs.edu.decorator.CountingPagingDecorator;
@@ -23,23 +21,24 @@ class Application {
 
     public static void main(String[] args) {
 
-        Message message1 = new Message(MINOR, "message 1");
+        Message mess1 = new Message(MAJOR, "111");
+        Message mess2 = new Message(REGULAR, "222");
+        Message mess3 = new Message(MAJOR, "333");
+        Message mess4 = new Message(MAJOR, "444");
+        Message mess5 = new Message(REGULAR, "message 2");
 
-        Message message2 = new Message(REGULAR, "message 2");
-        Message message3 = new Message(MAJOR, "message 3");
-        Message message4 = new Message(MAJOR, "4");
-        Message message5 = new Message(REGULAR, "message 2");
-        Message message6 = new Message(MINOR, "999");
+        service.log(mess1);
+        service.log(mess2, ASC);
+        service.log(mess3, DISTINCT);
+        service.log(mess4, ASC, DISTINCT);
+        service.log(mess5, ASC, DISTINCT);
 
-        service.log(message1, "added message 1");
-        service.log(message2, "added message 4");
-        service.log(message3, ASC, DOUBLES, "message 1");
-        service.log(message4, ASC, DISTINCT, "3", "2", "1");
+        System.out.println("=======");
 
-        System.out.println(message6);
-        System.out.println(message2.equals(message5));
-        System.out.println(message3.equals(message5));
+        System.out.println(mess5);
+        System.out.println(mess2.equals(mess5));
+        System.out.println(mess3.equals(mess5));
 
-        System.out.println(message2.hashCode());
+        System.out.println(mess2.hashCode());
     }
 }

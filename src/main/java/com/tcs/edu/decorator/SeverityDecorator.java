@@ -14,6 +14,7 @@ public class SeverityDecorator implements Decorator {
                 break;
             case MAJOR:
                 severityString = "(!!!)";
+                break;
             default:
                 throw new RuntimeException("Неизвестный уровень серьезности");
         }

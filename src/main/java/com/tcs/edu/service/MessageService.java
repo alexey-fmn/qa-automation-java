@@ -24,53 +24,39 @@ public class MessageService {
         this.decorators = decorators;
     }
 
-
-    /**
-     * Метод для текста только с уровнем значимости и текстом сообщекния. По умолчанию добавляется прямой порядок
-     * сортировки
-     *
-     * @param message строка и уровнель значимости, передается единым сообщением
-     * @param messages остальной текст
-     */
-    public void log(Message message, String... messages) {
-        log(message, Sorting.ASC, messages);
+    public void log(Message message) {
+        log(message, Sorting.ASC);
     }
 
-    /**
-     * Метод для сообщений с порядком сортировки. По умоляанию добавялется ворядок сортировки сообщений
-     *
-     * @param message строка и уровнель значимости, передается единым сообщением
-     * @param order порядок сортировки сообщений
-     * @param messages остальной текст
-     */
-    public void log(Message message, Sorting order, String... messages) {
-        log(message, order, DOUBLES, messages);
+    public void log(Message message, Sorting order) {
+        log(message, order, DOUBLES);
     }
 
-    /**
-     * Метод для сообщений со всем и параметрами
-     *
-     * @param message строка и уровнель значимости, передается единым сообщением
-     * @param messageOrder порядок сортировки сообщений
-     * @param doubling режим печати сообщений. С дублированием и без
-     * @param messages остальной текст
-     */
+    public void log(Message message, Duplication doubling) {
+        log(message, Sorting.ASC, doubling);
+    }
 
-    public void log(Message message, Sorting messageOrder, Duplication doubling, String... messages) {
+    public void log(Message message, Sorting order, Duplication doubling) {
+        log(message, order, doubling, new Message[]{});
+    }
+
+    public void log(Message message, Sorting messageOrder, Duplication doubling, Message... messages) {
 
         Message[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
         Message[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
         Message[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
 
-
         for (Message doublingMessage : doublingMessages) {
             String result = doublingMessage.getBody();
+
             for (Decorator decorator : decorators) {
                 result = decorator.decorate(result);
             }
+
             result = new SeverityDecorator(message.getLevel()).decorate(result);
             printService.print(result);
 
         }
     }
+
 }
