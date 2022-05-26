@@ -10,7 +10,7 @@ public class MessageConcatenator extends ValidatedService {
         try {
             super.argsIsValid(message);
             return Stream.concat(Stream.of(message), Stream.of(messages)).toArray(Message[]::new);
-        } catch (IllegalArgumentException e) {
+        } catch (LogException e) {
             throw new LogException("Wrong message arguments!", e);
         }
     }

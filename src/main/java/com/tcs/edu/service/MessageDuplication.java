@@ -25,7 +25,7 @@ public class MessageDuplication extends ValidatedService {
                 break;
             }
             return refactorMessages;
-        } catch (IllegalArgumentException e) {
+        } catch (LogException e) {
             throw new LogException("Wrong message arguments at messageDuplication!", e);
         }
 
@@ -33,7 +33,6 @@ public class MessageDuplication extends ValidatedService {
 
     boolean isMessageInArray(Message message, Message... messages) {
         boolean isMessageInArray = false;
-
         try {
             super.argsIsValid(message);
             for (Message messageArray : messages) {
@@ -43,7 +42,7 @@ public class MessageDuplication extends ValidatedService {
                 }
             }
             return isMessageInArray;
-        } catch (IllegalArgumentException e) {
+        } catch (LogException e) {
             throw new LogException("Wrong message arguments!", e);
         }
     }

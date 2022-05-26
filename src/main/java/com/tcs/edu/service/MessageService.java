@@ -59,7 +59,7 @@ public class MessageService extends ValidatedService {
                 printService.print(result);
 
             }
-        } catch (IllegalArgumentException e) {
+        } catch (LogException e) {
             throw new LogException("Wrong message arguments!", e);
         }
 

@@ -1,10 +1,6 @@
 package com.tcs.edu.decorator;
 
-import com.tcs.edu.service.LogException;
-import com.tcs.edu.service.ValidatedService;
-import java.sql.SQLOutput;
-
-public class SeverityDecorator extends ValidatedService implements Decorator  {
+public class SeverityDecorator implements Decorator {
 
     private final String severityString;
 
@@ -27,6 +23,6 @@ public class SeverityDecorator extends ValidatedService implements Decorator  {
 
     @Override
     public String decorate(String message) {
-            return String.format("%s %s", severityString, message);
+        return String.format("%s %s", severityString, message);
     }
 }
