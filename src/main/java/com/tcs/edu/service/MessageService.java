@@ -9,7 +9,7 @@ import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 import com.tcs.edu.printer.Printer;
 
-public class MessageService {
+public class MessageService extends ValidatedService {
 
 
     private final Printer printService;
@@ -42,21 +42,28 @@ public class MessageService {
 
     public void log(Message message, Sorting messageOrder, Duplication doubling, Message... messages) {
 
-        Message[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
-        Message[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
-        Message[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
+        try {
+            super.argsIsValid(messages);
+            Message[] messageConcatenation = concatenateService.messageConcatenation(message, messages);
+            Message[] sortedMessages = sortService.sortMessages(messageOrder, messageConcatenation);
+            Message[] doublingMessages = duplicateService.messageDuplication(doubling, sortedMessages);
 
-        for (Message doublingMessage : doublingMessages) {
-            String result = doublingMessage.getBody();
+            for (Message doublingMessage : doublingMessages) {
+                String result = doublingMessage.getBody();
 
-            for (Decorator decorator : decorators) {
-                result = decorator.decorate(result);
+                for (Decorator decorator : decorators) {
+                    result = decorator.decorate(result);
+                }
+
+                result = new SeverityDecorator(message.getLevel()).decorate(result);
+                printService.print(result);
+
             }
-
-            result = new SeverityDecorator(message.getLevel()).decorate(result);
-            printService.print(result);
-
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments at MessageService!", e);
         }
+
+
     }
 
 }

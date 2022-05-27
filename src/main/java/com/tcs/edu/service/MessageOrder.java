@@ -3,10 +3,12 @@ package com.tcs.edu.service;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 
-public class MessageOrder {
+public class MessageOrder extends ValidatedService {
 
     public Message[] sortMessages(Sorting messageOrder, Message... messages) {
-        if (messages != null) {
+
+        try {
+            super.argsIsValid(messages);
             Message[] sortedMessages = new Message[messages.length];
             switch (messageOrder) {
                 case ASC: {
@@ -17,11 +19,10 @@ public class MessageOrder {
                         sortedMessages[j] = messages[i];
                     }
                 }
-                break;
             }
             return sortedMessages;
-        } else {
-            return null;
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments!", e);
         }
     }
 }

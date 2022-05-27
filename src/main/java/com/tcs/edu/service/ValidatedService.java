@@ -1,15 +1,18 @@
 package com.tcs.edu.service;
 
+import com.tcs.edu.domain.Message;
+
 public class ValidatedService {
 
-    protected boolean argsIsValid(String message) {
-        if (message == null) {
-            return false;
+    protected void argsIsValid(Message message) {
+        if (message.getLevel() == null || message.getBody() == null) {
+            throw new IllegalArgumentException("Message argument is null!");
         }
-        if (message.isEmpty()) {
-            return false;
-        }
-        return true;
     }
 
+    protected void argsIsValid(Message[] messages) {
+        if (messages == null) {
+            throw new IllegalArgumentException("Messages argument is null!");
+        }
+    }
 }
