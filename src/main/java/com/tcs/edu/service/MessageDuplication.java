@@ -25,7 +25,7 @@ public class MessageDuplication extends ValidatedService {
                 break;
             }
             return refactorMessages;
-        } catch (LogException e) {
+        } catch (IllegalArgumentException e) {
             throw new LogException("Wrong message arguments at messageDuplication!", e);
         }
 
@@ -42,8 +42,8 @@ public class MessageDuplication extends ValidatedService {
                 }
             }
             return isMessageInArray;
-        } catch (LogException e) {
-            throw new LogException("Wrong message arguments!", e);
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments at MessageDuplication!", e);
         }
     }
 }

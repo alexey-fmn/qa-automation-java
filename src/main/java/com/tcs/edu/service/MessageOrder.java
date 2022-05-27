@@ -21,7 +21,7 @@ public class MessageOrder extends ValidatedService {
                 }
             }
             return sortedMessages;
-        } catch (LogException e) {
+        } catch (IllegalArgumentException e) {
             throw new LogException("Wrong message arguments!", e);
         }
     }

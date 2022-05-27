@@ -59,8 +59,8 @@ public class MessageService extends ValidatedService {
                 printService.print(result);
 
             }
-        } catch (LogException e) {
-            throw new LogException("Wrong message arguments!", e);
+        } catch (IllegalArgumentException e) {
+            throw new LogException("Wrong message arguments at MessageService!", e);
         }
 
 
