@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class HashMapMessageRepository implements MessageRepository {
 
@@ -31,7 +32,7 @@ public class HashMapMessageRepository implements MessageRepository {
     }
 
     @Override
-    public Collection<Message> findBySeverity(SeverityLevel by) {
+    public Collection<Message> findBySeverityIter(SeverityLevel by) {
         Collection<Message> filteredMessages = new ArrayList<>();
         for (Message current : messages.values()) {
             if (current.getLevel() == by) {
@@ -39,6 +40,15 @@ public class HashMapMessageRepository implements MessageRepository {
             }
         }
         return filteredMessages;
+    }
+
+    @Override
+    public Collection<Message> findBySeverityDecl(SeverityLevel by) {
+        return messages
+            .values()
+            .stream()
+            .filter(message -> message.getLevel() == by)
+            .collect(Collectors.toList());
     }
 
     @Override

@@ -42,6 +42,8 @@ class Application {
         Message mess99 = new Message(SeverityLevel.MINOR, "message 99");
         Message mess98 = new Message(SeverityLevel.REGULAR, "message 98");
         Message mess97 = new Message(SeverityLevel.MAJOR, "message 97");
+        Message mess96 = new Message(SeverityLevel.MINOR, "message 96");
+        Message mess95 = new Message(SeverityLevel.REGULAR, "message 95");
 
         final UUID generatedKey = service.logMessageInMemory(mess0);
         System.out.println("Message with key " + generatedKey + " is " + service.findByPrimaryKey(generatedKey));
@@ -55,15 +57,19 @@ class Application {
             System.out.println(current);
         }
 
-        System.out.println("==========ex. 11.4==========");
+        System.out.println("==========ex. 11.4(iter)==========");
 
         service.logMessageInMemory(mess98);
         service.logMessageInMemory(mess97);
 
-        for (Message current : service.findBySeverity(SeverityLevel.MAJOR)) {
+        for (Message current : service.findBySeverityIter(SeverityLevel.MAJOR)) {
             System.out.println(current);
         }
 
+        System.out.println("==========ex. 11.4(declare)==========");
 
+        for (Message current : service.findBySeverityDecl(SeverityLevel.MINOR)) {
+            System.out.println(current);
+        }
     }
 }

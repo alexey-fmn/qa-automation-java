@@ -91,8 +91,13 @@ public class MessageService extends ValidatedService implements MessageRepositor
     }
 
     @Override
-    public Collection<Message> findBySeverity(SeverityLevel by) {
-        return messageRepository.findBySeverity(by);
+    public Collection<Message> findBySeverityIter(SeverityLevel by) {
+        return messageRepository.findBySeverityIter(by);
+    }
+
+    @Override
+    public Collection<Message> findBySeverityDecl(SeverityLevel by) {
+        return messageRepository.findBySeverityDecl(by);
     }
 
     public UUID logMessageInMemory(Message message) {

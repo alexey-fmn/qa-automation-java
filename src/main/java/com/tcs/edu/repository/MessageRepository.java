@@ -13,5 +13,7 @@ public interface MessageRepository {
 
     Collection<Message> findAll();
 
-    Collection<Message> findBySeverity(SeverityLevel by);
+    Collection<Message> findBySeverityIter(SeverityLevel by);
+
+    Collection<Message> findBySeverityDecl(SeverityLevel by);
 }
