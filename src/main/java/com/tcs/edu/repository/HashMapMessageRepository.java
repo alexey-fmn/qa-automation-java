@@ -1,6 +1,8 @@
 package com.tcs.edu.repository;
 
+import com.tcs.edu.decorator.SeverityLevel;
 import com.tcs.edu.domain.Message;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,17 @@ public class HashMapMessageRepository implements MessageRepository {
     @Override
     public Collection<Message> findAll() {
         return messages.values();
+    }
+
+    @Override
+    public Collection<Message> findBySeverity(SeverityLevel by) {
+        Collection<Message> filteredMessages = new ArrayList<>();
+        for (Message current : messages.values()) {
+            if (current.getLevel() == by) {
+                filteredMessages.add(current);
+            }
+        }
+        return filteredMessages;
     }
 
     @Override

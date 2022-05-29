@@ -36,11 +36,17 @@ class Application {
 //
 //        System.out.println(mess2.hashCode());
 
+        System.out.println("==========ex. 11.1, 11.2==========");
+
         Message mess0 = new Message("message 0");
         Message mess99 = new Message(SeverityLevel.MINOR, "message 99");
+        Message mess98 = new Message(SeverityLevel.REGULAR, "message 98");
+        Message mess97 = new Message(SeverityLevel.MAJOR, "message 97");
 
         final UUID generatedKey = service.logMessageInMemory(mess0);
         System.out.println("Message with key " + generatedKey + " is " + service.findByPrimaryKey(generatedKey));
+
+        System.out.println("==========ex. 11.3==========");
 
         service.logMessageInMemory(mess99);
         final Collection<Message> allMessages = service.findAll();
@@ -48,5 +54,16 @@ class Application {
         for (Message current : allMessages) {
             System.out.println(current);
         }
+
+        System.out.println("==========ex. 11.4==========");
+
+        service.logMessageInMemory(mess98);
+        service.logMessageInMemory(mess97);
+
+        for (Message current : service.findBySeverity(SeverityLevel.MAJOR)) {
+            System.out.println(current);
+        }
+
+
     }
 }

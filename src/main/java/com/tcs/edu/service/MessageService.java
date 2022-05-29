@@ -4,6 +4,7 @@ import static com.tcs.edu.domain.Duplication.DOUBLES;
 
 import com.tcs.edu.decorator.Decorator;
 import com.tcs.edu.decorator.SeverityDecorator;
+import com.tcs.edu.decorator.SeverityLevel;
 import com.tcs.edu.domain.Duplication;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
@@ -87,6 +88,11 @@ public class MessageService extends ValidatedService implements MessageRepositor
     @Override
     public Collection<Message> findAll() {
         return messageRepository.findAll();
+    }
+
+    @Override
+    public Collection<Message> findBySeverity(SeverityLevel by) {
+        return messageRepository.findBySeverity(by);
     }
 
     public UUID logMessageInMemory(Message message) {
