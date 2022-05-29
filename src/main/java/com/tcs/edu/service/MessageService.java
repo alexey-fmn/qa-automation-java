@@ -10,6 +10,7 @@ import com.tcs.edu.domain.Sorting;
 import com.tcs.edu.printer.Printer;
 import com.tcs.edu.repository.HashMapMessageRepository;
 import com.tcs.edu.repository.MessageRepository;
+import java.util.Collection;
 import java.util.UUID;
 
 public class MessageService extends ValidatedService implements MessageRepository {
@@ -81,6 +82,11 @@ public class MessageService extends ValidatedService implements MessageRepositor
     @Override
     public Message findByPrimaryKey(UUID key) {
         return messageRepository.findByPrimaryKey(key);
+    }
+
+    @Override
+    public Collection<Message> findAll() {
+        return messageRepository.findAll();
     }
 
     public UUID logMessageInMemory(Message message) {

@@ -1,6 +1,7 @@
 package com.tcs.edu.repository;
 
 import com.tcs.edu.domain.Message;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,6 +21,11 @@ public class HashMapMessageRepository implements MessageRepository {
     @Override
     public Message findByPrimaryKey(UUID key) {
         return messages.get(key);
+    }
+
+    @Override
+    public Collection<Message> findAll() {
+        return messages.values();
     }
 
     @Override

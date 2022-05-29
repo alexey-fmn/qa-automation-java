@@ -1,10 +1,12 @@
 package com.tcs.edu;
 
 import com.tcs.edu.decorator.CountingPagingDecorator;
+import com.tcs.edu.decorator.SeverityLevel;
 import com.tcs.edu.decorator.TimestampDecorator;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.printer.ConsolePrinter;
 import com.tcs.edu.service.MessageService;
+import java.util.Collection;
 import java.util.UUID;
 
 class Application {
@@ -34,8 +36,17 @@ class Application {
 //
 //        System.out.println(mess2.hashCode());
 
-        Message mess0 = new Message("uuuuuuuu");
+        Message mess0 = new Message("message 0");
+        Message mess99 = new Message(SeverityLevel.MINOR, "message 99");
+
         final UUID generatedKey = service.logMessageInMemory(mess0);
         System.out.println("Message with key " + generatedKey + " is " + service.findByPrimaryKey(generatedKey));
+
+        service.logMessageInMemory(mess99);
+        final Collection<Message> allMessages = service.findAll();
+
+        for (Message current : allMessages) {
+            System.out.println(current);
+        }
     }
 }
