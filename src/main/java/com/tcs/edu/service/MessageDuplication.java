@@ -31,7 +31,7 @@ public class MessageDuplication extends ValidatedService {
 
     }
 
-    boolean isMessageInArray(Message message, Message... messages) {
+    public boolean isMessageInArray(Message message, Message... messages) {
         boolean isMessageInArray = false;
         try {
             super.argsIsValid(message);
