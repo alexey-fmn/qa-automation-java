@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,6 +17,7 @@ public class HashMapMessageRepository implements MessageRepository {
     public UUID create(Message message) {
         UUID uuid = UUID.randomUUID();
         messages.put(uuid, message);
+        message.setId(uuid);
         return uuid;
     }
 
@@ -51,20 +51,4 @@ public class HashMapMessageRepository implements MessageRepository {
             .collect(Collectors.toList());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        HashMapMessageRepository that = (HashMapMessageRepository) o;
-        return Objects.equals(messages, that.messages);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(messages);
-    }
 }

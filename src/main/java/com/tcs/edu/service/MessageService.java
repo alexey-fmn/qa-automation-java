@@ -23,7 +23,7 @@ public class MessageService extends ValidatedService implements MessageRepositor
     private final MessageOrder sortService = new MessageOrder();
 
     private final Decorator[] decorators;
-    private static final MessageRepository messageRepository = new HashMapMessageRepository();
+    private final MessageRepository messageRepository = new HashMapMessageRepository();
 
     public MessageService(Printer printService, Decorator... decorators) {
         this.printService = printService;
@@ -76,7 +76,6 @@ public class MessageService extends ValidatedService implements MessageRepositor
 
     @Override
     public UUID create(Message message) {
-        System.out.println("message = " + message);
         return message.getId();
     }
 
