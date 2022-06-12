@@ -2,6 +2,7 @@ import static com.tcs.edu.decorator.SeverityLevel.MAJOR;
 import static com.tcs.edu.decorator.SeverityLevel.MINOR;
 import static com.tcs.edu.decorator.SeverityLevel.REGULAR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.service.MessageConcatenator;
@@ -21,6 +22,17 @@ public class MessageConcatenationTest {
 
         assertEquals(3, concatMessages.length);
 
+    }
+
+    @Test
+    public void shouldReturnExceptionWhenGivenWithoutArguments() {
+        final MessageConcatenator concatenatedMessage = new MessageConcatenator();
+        Message mess1 = new Message(MAJOR, "111");
+
+        assertThrows(
+            NullPointerException.class,
+            () -> concatenatedMessage.messageConcatenation(mess1, null)
+        );
     }
 
     // нужно добавить тесты на ассерт, пока не разобрался как

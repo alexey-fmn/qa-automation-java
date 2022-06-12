@@ -2,10 +2,13 @@ import static com.tcs.edu.decorator.SeverityLevel.MAJOR;
 import static com.tcs.edu.decorator.SeverityLevel.REGULAR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
+import com.tcs.edu.service.LogException;
 import com.tcs.edu.service.MessageOrder;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class MessageOrderTest {
@@ -34,5 +37,14 @@ public class MessageOrderTest {
         assertNotEquals(mess1, orderedMessages[0]);
     }
 
-    // нужно добавить тесты на ассерт, пока не разобрался как
+    @Test
+    public void shouldReturnExceptionWhenGivenWithoutArguments() {
+        final MessageOrder orderService = new MessageOrder();
+
+        assertThrows(
+            LogException.class,
+            () -> orderService.sortMessages(Sorting.DESC, null)
+        );
+
+    }
 }
