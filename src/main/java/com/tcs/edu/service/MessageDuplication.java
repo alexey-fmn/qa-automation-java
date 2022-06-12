@@ -9,22 +9,24 @@ public class MessageDuplication extends ValidatedService {
 
         try {
             super.argsIsValid(messages);
-            Message[] refactorMessages = new Message[messages.length];
+            Message[] uniqueMessages = new Message[messages.length];
             switch (doubling) {
                 case DOUBLES: {
                     return messages;
                 }
                 case DISTINCT: {
-                    refactorMessages = new Message[messages.length];
                     for (int i = 0; i <= messages.length - 1; i++) {
-                        if (!isMessageInArray(messages[i], refactorMessages)) {
-                            refactorMessages[i] = messages[i];
+                        if (!isMessageInArray(messages[i], uniqueMessages)) {
+                            uniqueMessages[i] = messages[i];
+
                         }
+
                     }
+
                 }
                 break;
             }
-            return refactorMessages;
+            return uniqueMessages;
         } catch (IllegalArgumentException e) {
             throw new LogException("Wrong message arguments at messageDuplication!", e);
         }

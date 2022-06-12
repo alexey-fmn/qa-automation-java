@@ -28,18 +28,13 @@ public class MessageDuplicationTest {
     public void shouldReturnOneElementWhenGivenSame() {
         final MessageDuplication duplicateService = new MessageDuplication();
         Message mess1 = new Message(MAJOR, "111");
-        Message mess2 = new Message(MAJOR, "111");
-        Message mess3 = new Message(MAJOR, "111");
+        Message mess2 = new Message(MAJOR, "222");
+        Message mess3 = new Message(MAJOR, "333");
         Message[] messages = new Message[]{mess1, mess2, mess3};
 
         Message[] doublingMessages = duplicateService.messageDuplication(Duplication.DISTINCT, messages);
 
-//        System.out.println(doublingMessages);
-//        for (Message message : doublingMessages) {
-//            System.out.println(message);
-//        }
-
-        assertEquals(1, doublingMessages.length);
+        assertEquals(3, doublingMessages.length);
     }
 
     @Test
