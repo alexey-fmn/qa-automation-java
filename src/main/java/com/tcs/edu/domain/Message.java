@@ -2,16 +2,23 @@ package com.tcs.edu.domain;
 
 import com.tcs.edu.decorator.SeverityLevel;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Message {
 
-    private final SeverityLevel level;
+    private SeverityLevel level = SeverityLevel.REGULAR;
     private final String body;
+    private UUID id;
+
+    public Message(String body) {
+        this.body = body;
+    }
 
     public Message(SeverityLevel level, String body) {
         this.level = level;
         this.body = body;
     }
+
 
     public SeverityLevel getLevel() {
         return level;
@@ -20,6 +27,7 @@ public class Message {
     public String getBody() {
         return body;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -40,9 +48,17 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
+        return "{" +
             "level=" + level +
             ", body='" + body + '\'' +
             '}';
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

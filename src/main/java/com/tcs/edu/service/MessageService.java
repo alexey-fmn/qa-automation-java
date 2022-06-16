@@ -4,12 +4,17 @@ import static com.tcs.edu.domain.Duplication.DOUBLES;
 
 import com.tcs.edu.decorator.Decorator;
 import com.tcs.edu.decorator.SeverityDecorator;
+import com.tcs.edu.decorator.SeverityLevel;
 import com.tcs.edu.domain.Duplication;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.domain.Sorting;
 import com.tcs.edu.printer.Printer;
+import com.tcs.edu.repository.HashMapMessageRepository;
+import com.tcs.edu.repository.MessageRepository;
+import java.util.Collection;
+import java.util.UUID;
 
-public class MessageService extends ValidatedService {
+public class MessageService extends ValidatedService implements MessageRepository {
 
 
     private final Printer printService;
@@ -18,11 +23,13 @@ public class MessageService extends ValidatedService {
     private final MessageOrder sortService = new MessageOrder();
 
     private final Decorator[] decorators;
+    private static final MessageRepository messageRepository = new HashMapMessageRepository();
 
     public MessageService(Printer printService, Decorator... decorators) {
         this.printService = printService;
         this.decorators = decorators;
     }
+
 
     public void log(Message message) {
         log(message, Sorting.ASC);
@@ -66,4 +73,38 @@ public class MessageService extends ValidatedService {
 
     }
 
+
+    @Override
+    public UUID create(Message message) {
+        System.out.println("message = " + message);
+        return message.getId();
+    }
+
+    @Override
+    public Message findByPrimaryKey(UUID key) {
+        return messageRepository.findByPrimaryKey(key);
+    }
+
+    @Override
+    public Collection<Message> findAll() {
+        return messageRepository.findAll();
+    }
+
+    @Override
+    public Collection<Message> findBySeverityIter(SeverityLevel by) {
+        return messageRepository.findBySeverityIter(by);
+    }
+
+    @Override
+    public Collection<Message> findBySeverityDecl(SeverityLevel by) {
+        return messageRepository.findBySeverityDecl(by);
+    }
+
+    public UUID logMessageInMemory(Message message) {
+        return messageRepository.create(message);
+    }
+
+
 }
+
+
