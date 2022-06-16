@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.tcs.edu.domain.Duplication;
 import com.tcs.edu.domain.Message;
+import com.tcs.edu.service.LogException;
 import com.tcs.edu.service.MessageDuplication;
 import org.junit.jupiter.api.Test;
 
@@ -28,18 +29,13 @@ public class MessageDuplicationTest {
     public void shouldReturnOneElementWhenGivenSame() {
         final MessageDuplication duplicateService = new MessageDuplication();
         Message mess1 = new Message(MAJOR, "111");
-        Message mess2 = new Message(MAJOR, "111");
-        Message mess3 = new Message(MAJOR, "111");
+        Message mess2 = new Message(MAJOR, "222");
+        Message mess3 = new Message(MAJOR, "333");
         Message[] messages = new Message[]{mess1, mess2, mess3};
 
         Message[] doublingMessages = duplicateService.messageDuplication(Duplication.DISTINCT, messages);
 
-//        System.out.println(doublingMessages);
-//        for (Message message : doublingMessages) {
-//            System.out.println(message);
-//        }
-
-        assertEquals(1, doublingMessages.length);
+        assertEquals(3, doublingMessages.length);
     }
 
     @Test
@@ -48,8 +44,8 @@ public class MessageDuplicationTest {
         final MessageDuplication duplicateService = new MessageDuplication();
 
         assertThrows(
-            IllegalArgumentException.class,
-            () -> duplicateService.messageDuplication(Duplication.DISTINCT)
+            LogException.class,
+            () -> duplicateService.messageDuplication(Duplication.DISTINCT, null)
         );
     }
 
@@ -79,18 +75,11 @@ public class MessageDuplicationTest {
     public void shpuldReturnExceptionWhenGivenWithoutArguments() {
 
         final MessageDuplication messageArray = new MessageDuplication();
-        Message mess1 = new Message(MAJOR, "111");
 
         assertThrows(
-            IllegalArgumentException.class,
-            () -> messageArray.isMessageInArray(mess1)
+            NullPointerException.class,
+            () -> messageArray.isMessageInArray(null, null)
         );
     }
-
-//    @Test
-//    public void shouldReturnOneElementWhenUseWithDoubles() {
-//        final MessageDuplication duplicateService = new MessageDuplication();
-//        Message mess0 = new Message();
-//    }
 
 }
