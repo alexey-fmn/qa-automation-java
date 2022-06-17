@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import io.restassured.RestAssured;
 import io.restassured.authentication.PreemptiveBasicAuthScheme;
 import io.restassured.response.Response;
+import jdk.internal.vm.annotation.ReservedStackAccess;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -116,4 +117,5 @@ public class ApiTest {
 
         Assertions.assertEquals(404, response.statusCode());
     }
+
 }
