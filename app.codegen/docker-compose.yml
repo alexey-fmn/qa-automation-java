@@ -17,7 +17,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: P@ssw0rd
 
   db:
-    image: postgres:11-alpine
+    image: postgres
     ports:
       - "5432:5432"
     networks:
